@@ -9,8 +9,16 @@
 namespace Yandex\Tests\Fotki;
 
 use Yandex\Tests\TestCase;
+use Yandex\Common\AbstractServiceClient;
+use Yandex\Fotki\FotkiClient;
 
 class FotkiClientTest extends TestCase
 {
-	
+	/**
+	 *
+	 */
+	public function testGetAlbums()
+	{
+		//TODO: get albums from user 'gornoaleksandr'
+	}
 }
