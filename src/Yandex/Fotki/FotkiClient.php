@@ -1,17 +1,29 @@
 <?php
-
-namespace Yandex\Fotki;
-
-use Yandex\Common\AbstractServiceClient;
-use Yandex\Common\HttpMethod;
-use Yandex\Fotki\ImageSizes;
-use Yandex\Fotki\Fotki\Models\Album;
-
 /**
  * Created by PhpStorm.
  * User: daryakiryanova
  * Date: 09.11.16
  * Time: 22:17
+ */
+
+namespace Yandex\Fotki;
+
+use Yandex\Common\AbstractServiceClient;
+use Yandex\Common\HttpMethod;
+use Yandex\Fotki\Models\Album;
+use Yandex\Fotki\Models\Photo;
+use Yandex\Fotki\Models\Tag;
+
+/**
+ * All photo links (from img href or cover link for album) are being saved
+ * without image size suffix.
+ *
+ * It's done to give users chance to choose it by himself,
+ * because maybe some want to use cover image with XXS size,
+ * but another want to use L or bigger.
+ *
+ * The same situation with references for photos.
+ * Documentation is here https://tech.yandex.ru/fotki/doc/concepts/scheme-docpage/
  *
  * Class FotkiClient
  * @package Yandex\Fotki
@@ -21,17 +33,20 @@ class FotkiClient extends AbstractServiceClient
 	/**
 	 * @var string
 	 */
-	protected $_serviceDomain = 'api-fotki.yandex.ru/api/users/';
+	protected $serviceDomain = 'api-fotki.yandex.ru';
+	/**
+	 * @var string
+	 */
+	protected $userInfoLocation = '/api/users';
+	/**
+	 * @var string
+	 */
+	protected $serviceScheme = parent::HTTP_SCHEME;
 	
 	/**
 	 * @var string
 	 */
-	protected $_serviceScheme = parent::HTTP_SCHEME;
-	
-	/**
-	 * @var string
-	 */
-	private $__login;
+	private $login;
 	
 	/**
 	 * Data types for getting service document from Yandex.Fotki
@@ -40,7 +55,7 @@ class FotkiClient extends AbstractServiceClient
 	const XML_TYPE = 'xml';
 	
 	/**
-	 * Locations for getting neccessary data from Yandex.Fotki
+	 * Locations for getting necessary data from Yandex.Fotki
 	 */
 	const SERVICE_DOC = '/';
 	const ALBUM_PATH = '/album/';
@@ -50,7 +65,7 @@ class FotkiClient extends AbstractServiceClient
 	
 	public function __construct($login)
 	{
-		$this->__login = $login;
+		$this->login = $login;
 	}
 	
 	/**
@@ -59,11 +74,11 @@ class FotkiClient extends AbstractServiceClient
 	 * Далее вычленяется информация по каждому альбому.
 	 * Возвращается массив объектов с полученными данными данными.
 	 *
-	 * @return array
+	 * @return array|string
 	 */
 	public function getAlbums()
 	{
-		$url = $this->_serviceDomain . $this->__login . self::ALBUMS_PATH . '?' .
+		$url = $this->serviceDomain . $this->login . self::ALBUMS_PATH . '?' .
 			\GuzzleHttp\Psr7\build_query(['format' => self::JSON_TYPE]);
 		
 		try
@@ -81,134 +96,102 @@ class FotkiClient extends AbstractServiceClient
 			return 'Error: ' . $e->getMessage();
 		}
 		
-		$result = $this->processAlbums(\GuzzleHttp\json_decode($responseData));
+		$result = $this->processAlbums(json_decode($responseData, true));
 		
 		return $result;
 	}
 	
 	/**
-	 * Возвращает информацию обо всех фотографих альбома
-	 *
-	 * @param int $album
-	 * @return array|string
+	 * @param $albumId
+	 * @return string|Album
 	 */
-	public function getPhotosForAlbum($album)
+	public function getAlbum($albumId)
 	{
-		// формирую ссылку, на которую будет обращение
-		$host = self::API_URL . $this->login . self::ALBUM_PATH . $album . self::PHOTOS_PATH;
+		$url = $this->serviceDomain . $this->login .
+			self::ALBUM_PATH . $albumId . '/?' .
+			\GuzzleHttp\Psr7\build_query(['format' => self::JSON_TYPE]);
 		
-		// формирую запрос
-		$request = new \HTTP_Request2($host, \HTTP_Request2::METHOD_GET);
-		
-		// получаю ответ|ошибку от сервиса
-		try {
-			$response = $request->send();
-			if (200 == $response->getStatus())
-			{
-				$response = $response->getBody();
-			}
+		try
+		{
+			$response = $this->sendRequest(HttpMethod::GET, $url);
+			
+			if ($response->getStatusCode() == 200)
+				$responseData = $response->getBody();
 			else
-			{
-				return 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
-				$response->getReasonPhrase();
-			}
+				return 'Unexpected HTTP status: ' . $response->getStatusCode() . ' ' .
+					$response->getReasonPhrase();
 		}
-		catch (\HTTP_Request2_Exception $e)
+		catch (\Exception $e)
 		{
 			return 'Error: ' . $e->getMessage();
 		}
 		
-		// преобразовываю ответ в SimpleXMLElement
-		$photos = new \SimpleXMLElement($response);
+		$result = $this->processAlbum(json_decode($responseData, true));
 		
-		$result = [];
-		foreach ($photos->entry as $photo)
+		return $result;
+	}
+	
+	/**
+	 * Возвращает информацию обо всех фотографих альбома.
+	 *
+	 * @param $album integer
+	 * @param $fetchTagsInfo boolean
+	 * @return array|string
+	 */
+	public function getAlbumPhotos($album, $fetchTagsInfo = false)
+	{
+		$url = $this->serviceDomain . $this->login . self::ALBUM_PATH .
+			$album . self::PHOTOS_PATH . '?' .
+			\GuzzleHttp\Psr7\build_query(['format' => self::JSON_TYPE]);
+		
+		try
 		{
-			// id альбома
-			$id = explode(':',$photo->id);
-			$id = array_pop($id);
-//
-//			// владелец альбома
-//			$author = $photo->author->name;
-//
-//			// название фотографии
-//			$title = $photo->title;
-//
-//			// ссылка на фотографию
-//			$link = $photo->content->attributes()->src;
+			$response = $this->sendRequest(HttpMethod::GET, $url);
 			
-			$result[] = $id;
+			if ($response->getStatusCode() == 200)
+				$responseData = $response->getBody();
+			else
+				return 'Unexpected HTTP status: ' . $response->getStatusCode() . ' ' .
+				$response->getReasonPhrase();
 		}
+		catch (\Exception $e)
+		{
+			return 'Error: ' . $e->getMessage();
+		}
+		
+		$result = $this->processAlbumPhotos(json_decode($responseData, true), $fetchTagsInfo);
 		
 		return $result;
 	}
 	
 	/**
 	 * Возвращает информацию о фотографии по переданному ее id.
-	 * Второй параметр $size - это размер фотографии, он может быть от
-	 * XXXS (50x50) до XXXL (960x1280).
-	 * Ссылка, на которую будет запрос к яндексу, может быть передана
-	 * либо сформирована внутри функции.
 	 *
-	 * @param $photoId
-	 * @param string $size
-	 * @return string
+	 * @param $photoId integer
+	 * @param $fetchTagsInfo boolean
+	 * @return string|Photo
 	 */
-	public function getPhoto($photoId, $size = 'orig', $host = null)
+	public function getPhoto($photoId, $fetchTagsInfo = false)
 	{
-		// формирую ссылку, на которую будет обращение
-		if (!$host)
+		$url = $this->serviceDomain . $this->login . self::PHOTO_PATH . $photoId . '?' .
+			\GuzzleHttp\Psr7\build_query(['format' => self::JSON_TYPE]);
+		
+		try
 		{
-			$host = self::API_URL . $this->login . self::PHOTO_PATH . $photoId . '/';
-		}
-		
-		// формирую запрос
-		$request = new \HTTP_Request2($host, \HTTP_Request2::METHOD_GET);
-		
-		// получаю ответ|ошибку от сервиса
-		try {
-			$response = $request->send();
-			if (200 == $response->getStatus())
-			{
-				$response = $response->getBody();
-			}
+			$response = $this->sendRequest(HttpMethod::GET, $url);
+			
+			if ($response->getStatusCode() == 200)
+				$responseData = $response->getBody();
 			else
-			{
-				return 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+				return 'Unexpected HTTP status: ' . $response->getStatusCode() . ' ' .
 				$response->getReasonPhrase();
-			}
 		}
-		catch (\HTTP_Request2_Exception $e)
+		catch (\Exception $e)
 		{
 			return 'Error: ' . $e->getMessage();
 		}
 		
-		// преобразовываю ответ в SimpleXMLElement
-		$photo = new \SimpleXMLElement($response);
-		$photo->registerXPathNamespace('f', 'yandex:fotki');
-		
-		// id фотографии
-		$id = explode(':',$photo->id);
-		$id = array_pop($id);
-		
-		// владелец фотографии
-		$author = $photo->author->name->__toString();
-		
-		// ссылка на фотографию
-		$link = '';
-		foreach ($photo->xpath('//f:img') as $linkInfo)
-		{
-			if ($linkInfo->attributes()->size == $size)
-			{
-				$link = $linkInfo->attributes()->href->__toString();
-			}
-		}
-		
-		$result = [
-			'photo_id' => $id,
-			'author' => $author,
-			'link' => $link,
-		];
+		$result = $this->processPhoto(json_decode($responseData, true), $fetchTagsInfo);
 		
 		return $result;
 	}
@@ -221,22 +204,122 @@ class FotkiClient extends AbstractServiceClient
 	{
 		$result = [];
 		foreach ($data['entries'] as $rawAlbum)
-		{
-			$album = new Album();
-			$album->setDateEdited($rawAlbum['edited']);
-			$album->setDateUpdated($rawAlbum['updated']);
-			$album->setLinkAlternate($rawAlbum['links']['alternate']);
-			$album->setLinkCover($rawAlbum['links']['cover']);
-			$album->setLinkEdit($rawAlbum['links']['edit']);
-			$album->setLinkPhotos($rawAlbum['links']['photos']);
-			$album->setLinkSelf($rawAlbum['links']['self']);
-			
-			
-			
-			$album->setAuthorName($rawAlbum['author']);
-			
-		}
+			$result[] = $this->processAlbum($rawAlbum);
 		
 		return $result;
+	}
+	
+	/**
+	 * @param array $rawAlbum
+	 * @return Album
+	 */
+	private function processAlbum(array $rawAlbum)
+	{
+		$album = new Album();
+		$album->setAuthor($rawAlbum['author']);
+		$album->setTitle($rawAlbum['title']);
+		$album->setSummary($rawAlbum['summary']);
+		$album->setId($rawAlbum['id']);
+		$album->setImageCount($rawAlbum['imageCount']);
+		$album->setDateEdited($rawAlbum['edited']);
+		$album->setDateUpdated($rawAlbum['updated']);
+		$album->setDatePublished($rawAlbum['published']);
+		$album->setLinkAlternate($rawAlbum['links']['alternate']);
+		$album->setLinkCover($rawAlbum['links']['cover']);
+		$album->setLinkEdit($rawAlbum['links']['edit']);
+		$album->setLinkPhotos($rawAlbum['links']['photos']);
+		$album->setLinkSelf($rawAlbum['links']['self']);
+		$album->setLinkYmapsml($rawAlbum['links']['ymapsml']);
+		
+		$imgHref = end($rawAlbum['img'])['href'];
+		$album->setImgHref(substr($imgHref, 0, strrpos($imgHref, '_') + 1));
+		
+		return $album;
+	}
+	
+	/**
+	 * @param $data array
+	 * @param $fetchTagsInfo boolean
+	 * @return array
+	 */
+	private function processAlbumPhotos(array $data, $fetchTagsInfo)
+	{
+		$result = [];
+		foreach ($data['entries'] as $rawPhoto)
+			$result[] = $this->processPhoto($rawPhoto, $fetchTagsInfo);
+		
+		return $result;
+	}
+	
+	/**
+	 * @param $rawPhoto array
+	 * @param $fetchTagsInfo boolean
+	 * @return Photo
+	 */
+	private function processPhoto(array $rawPhoto, $fetchTagsInfo)
+	{
+		$photo = new Photo();
+		$photo->setDateCreated($rawPhoto['created']);
+		$photo->setDateEdited($rawPhoto['edited']);
+		$photo->setDatePublished($rawPhoto['published']);
+		$photo->setDateUpdated($rawPhoto['updated']);
+		$photo->setDisableComments($rawPhoto['disableComments']);
+		$photo->setTitle($rawPhoto['title']);
+		$photo->setSummary($rawPhoto['summary']);
+		$photo->setAccess($rawPhoto['access']);
+		$photo->setAuthor($rawPhoto['author']);
+		$photo->setXxx($rawPhoto['xxx']);
+		$photo->setHideOriginal($rawPhoto['hideOriginal']);
+		$photo->setId($rawPhoto['id']);
+		$photo->setLinkAlbum($rawPhoto['links']['album']);
+		$photo->setLinkAlternate($rawPhoto['links']['alternate']);
+		$photo->setLinkEdit($rawPhoto['links']['edit']);
+		$photo->setLinkEditMedia($rawPhoto['links']['editMedia']);
+		$photo->setLinkSelf($rawPhoto['links']['self']);
+
+		if ($fetchTagsInfo)
+			$photo->setTags($this->processTags($rawPhoto['tags']));
+		else
+			$photo->setTags($rawPhoto['tags']);
+		
+		$imgHref = end($rawPhoto['img'])['href'];
+		$photo->setImgHref(substr($imgHref, 0, strrpos($imgHref, '_') + 1));
+		
+		return $photo;
+	}
+	
+	/**
+	 * @param array $data
+	 * @return array
+	 */
+	private function processTags(array $data)
+	{
+		$result = [];
+		
+		foreach ($data as $rawTag)
+			$result[] = $this->processTag($rawTag);
+		
+		return $result;
+	}
+	
+	/**
+	 * @param array $rawTag
+	 * @return Tag
+	 */
+	private function processTag(array $rawTag)
+	{
+		$tag = new Tag();
+		
+		$tag->setId($rawTag['id']);
+		$tag->setAuthor($rawTag['author']);
+		$tag->setTitle($rawTag['title']);
+		$tag->setDateUpdated($rawTag['updated']);
+		$tag->setImageCount($rawTag['imageCount']);
+		$tag->setLinkEdit($rawTag['links']['edit']);
+		$tag->setLinkPhotos($rawTag['links']['photos']);
+		$tag->setLinkAlternate($rawTag['links']['alternate']);
+		$tag->setLinkSelf($rawTag['links']['self']);
+		
+		return $tag;
 	}
 }

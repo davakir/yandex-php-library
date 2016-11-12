@@ -1,0 +1,91 @@
+{
+  "edited": "2016-11-12T09:29:01Z",
+  "updated": "2016-11-12T09:29:01Z",
+  "xxx": false,
+  "img": {
+    "XXS": {
+      "width": 75,
+      "href": "http://img-fotki.yandex.ru/get/101645/61850387.fd/0_164aa4_7ae72b84_XXS",
+      "height": 75
+    },
+    "XL": {
+      "width": 800,
+      "href": "http://img-fotki.yandex.ru/get/101645/61850387.fd/0_164aa4_7ae72b84_XL",
+      "height": 533
+    },
+    "M": {
+      "width": 300,
+      "href": "http://img-fotki.yandex.ru/get/101645/61850387.fd/0_164aa4_7ae72b84_M",
+      "height": 200
+    },
+    "L": {
+      "width": 500,
+      "href": "http://img-fotki.yandex.ru/get/101645/61850387.fd/0_164aa4_7ae72b84_L",
+      "height": 333
+    },
+    "XXXS": {
+      "width": 50,
+      "href": "http://img-fotki.yandex.ru/get/101645/61850387.fd/0_164aa4_7ae72b84_XXXS",
+      "height": 50
+    },
+    "XXXL": {
+      "width": 1280,
+      "href": "http://img-fotki.yandex.ru/get/101645/61850387.fd/0_164aa4_7ae72b84_XXXL",
+      "height": 853
+    },
+    "S": {
+      "width": 150,
+      "href": "http://img-fotki.yandex.ru/get/101645/61850387.fd/0_164aa4_7ae72b84_S",
+      "height": 100
+    },
+    "XS": {
+      "width": 100,
+      "href": "http://img-fotki.yandex.ru/get/101645/61850387.fd/0_164aa4_7ae72b84_XS",
+      "height": 67
+    },
+    "XXL": {
+      "width": 1024,
+      "href": "http://img-fotki.yandex.ru/get/101645/61850387.fd/0_164aa4_7ae72b84_XXL",
+      "height": 683
+    }
+  },
+  "links": {
+    "album": "http://api-fotki.yandex.ru/api/users/gornoaleksandr/album/192064/?format=json",
+    "editMedia": "http://img-fotki.yandex.ru/get/101645/61850387.fd/0_164aa4_7ae72b84_XXXL",
+    "self": "http://api-fotki.yandex.ru/api/users/gornoaleksandr/photo/1460900/?format=json",
+    "alternate": "http://fotki.yandex.ru/users/gornoaleksandr/view/1460900/",
+    "edit": "http://api-fotki.yandex.ru/api/users/gornoaleksandr/photo/1460900/?format=json"
+  },
+  "tags": {
+    "снег": "http://api-fotki.yandex.ru/api/users/gornoaleksandr/tag/%D1%81%D0%BD%D0%B5%D0%B3/",
+    "красота": "http://api-fotki.yandex.ru/api/users/gornoaleksandr/tag/%D0%BA%D1%80%D0%B0%D1%81%D0%BE%D1%82%D0%B0/",
+    "алма-ата": "http://api-fotki.yandex.ru/api/users/gornoaleksandr/tag/%D0%B0%D0%BB%D0%BC%D0%B0-%D0%B0%D1%82%D0%B0/",
+    "алматы": "http://api-fotki.yandex.ru/api/users/gornoaleksandr/tag/%D0%B0%D0%BB%D0%BC%D0%B0%D1%82%D1%8B/",
+    "kazakhstan": "http://api-fotki.yandex.ru/api/users/gornoaleksandr/tag/kazakhstan/",
+    "природа": "http://api-fotki.yandex.ru/api/users/gornoaleksandr/tag/%D0%BF%D1%80%D0%B8%D1%80%D0%BE%D0%B4%D0%B0/",
+    "казахстан": "http://api-fotki.yandex.ru/api/users/gornoaleksandr/tag/%D0%BA%D0%B0%D0%B7%D0%B0%D1%85%D1%81%D1%82%D0%B0%D0%BD/",
+    "горы": "http://api-fotki.yandex.ru/api/users/gornoaleksandr/tag/%D0%B3%D0%BE%D1%80%D1%8B/",
+    "anna gornostayeva": "http://api-fotki.yandex.ru/api/users/gornoaleksandr/tag/anna%20gornostayeva/",
+    "бао": "http://api-fotki.yandex.ru/api/users/gornoaleksandr/tag/%D0%B1%D0%B0%D0%BE/",
+    "осень": "http://api-fotki.yandex.ru/api/users/gornoaleksandr/tag/%D0%BE%D1%81%D0%B5%D0%BD%D1%8C/",
+    "пейзаж": "http://api-fotki.yandex.ru/api/users/gornoaleksandr/tag/%D0%BF%D0%B5%D0%B9%D0%B7%D0%B0%D0%B6/",
+    "almaty": "http://api-fotki.yandex.ru/api/users/gornoaleksandr/tag/almaty/",
+    "анна горностаева": "http://api-fotki.yandex.ru/api/users/gornoaleksandr/tag/%D0%B0%D0%BD%D0%BD%D0%B0%20%D0%B3%D0%BE%D1%80%D0%BD%D0%BE%D1%81%D1%82%D0%B0%D0%B5%D0%B2%D0%B0/",
+    "большое алматинское озеро": "http://api-fotki.yandex.ru/api/users/gornoaleksandr/tag/%D0%B1%D0%BE%D0%BB%D1%8C%D1%88%D0%BE%D0%B5%20%D0%B0%D0%BB%D0%BC%D0%B0%D1%82%D0%B8%D0%BD%D1%81%D0%BA%D0%BE%D0%B5%20%D0%BE%D0%B7%D0%B5%D1%80%D0%BE/"
+  },
+  "title": "БАО как зеркало.",
+  "summary": "С высоты птичьего полёта, озеро имеет невероятный цвет и меняется в зависимости от погоды и времени года.  Озеро находится во впадине, словно сверкающее зеркало, со всех сторон окруженное горными вершинами.   Высота над уровнем моря 2511м. Питающееся ледниковой водой озеро простирается на 1,6 км в длину, почти километр в ширину и 40 м в глубину.",
+  "access": "public",
+  "created": "2012-10-01T12:10:51Z",
+  "disableComments": false,
+  "authors": [
+    {
+      "name": "gornoaleksandr",
+      "uid": "61850387"
+    }
+  ],
+  "hideOriginal": true,
+  "author": "gornoaleksandr",
+  "id": "urn:yandex:fotki:gornoaleksandr:photo:1460900",
+  "published": "2016-11-09T05:56:34Z"
+}

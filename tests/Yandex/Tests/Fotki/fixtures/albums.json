@@ -1,0 +1,126 @@
+{
+  "updated": "2016-09-14T19:33:28Z",
+  "links": {
+    "self": "http://api-fotki.yandex.ru/api/users/bella21abyss/albums/?format=json",
+    "alternate": "http://fotki.yandex.ru/users/bella21abyss/albums/"
+  },
+  "title": "bella21abyss на Яндекс.Фотках",
+  "authors": [
+    {
+      "name": "bella21abyss",
+      "uid": "228271972"
+    }
+  ],
+  "entries": [
+    {
+      "edited": "2016-09-14T19:33:28Z",
+      "updated": "2016-09-14T19:33:28Z",
+      "links": {
+        "edit": "http://api-fotki.yandex.ru/api/users/bella21abyss/album/521851/?format=json",
+        "self": "http://api-fotki.yandex.ru/api/users/bella21abyss/album/521851/?format=json",
+        "alternate": "http://fotki.yandex.ru/users/bella21abyss/album/521851/",
+        "cover": "http://api-fotki.yandex.ru/api/users/bella21abyss/photo/1389663/?format=json",
+        "photos": "http://api-fotki.yandex.ru/api/users/bella21abyss/album/521851/photos/?format=json",
+        "ymapsml": "http://api-fotki.yandex.ru/api/users/bella21abyss/album/521851/photos.ymapsml/"
+      },
+      "authors": [
+        {
+          "name": "bella21abyss",
+          "uid": "228271972"
+        }
+      ],
+      "id": "urn:yandex:fotki:bella21abyss:album:521851",
+      "imageCount": 27,
+      "img": {
+        "XXS": {
+          "width": 75,
+          "href": "http://img-fotki.yandex.ru/get/135076/228271972.0/0_15345f_27d90cab_XXS",
+          "height": 75
+        },
+        "S": {
+          "width": 117,
+          "href": "http://img-fotki.yandex.ru/get/135076/228271972.0/0_15345f_27d90cab_S",
+          "height": 150
+        }
+      },
+      "title": "Фотографии с Geek Picnic",
+      "author": "bella21abyss",
+      "summary": "Ходили слушать лекции о новых технологиях!",
+      "published": "2016-07-14T19:07:18Z"
+    },
+    {
+      "edited": "2016-08-05T17:54:15Z",
+      "updated": "2016-08-05T17:54:15Z",
+      "links": {
+        "edit": "http://api-fotki.yandex.ru/api/users/bella21abyss/album/521977/?format=json",
+        "self": "http://api-fotki.yandex.ru/api/users/bella21abyss/album/521977/?format=json",
+        "alternate": "http://fotki.yandex.ru/users/bella21abyss/album/521977/",
+        "cover": "http://api-fotki.yandex.ru/api/users/bella21abyss/photo/1389785/?format=json",
+        "photos": "http://api-fotki.yandex.ru/api/users/bella21abyss/album/521977/photos/?format=json",
+        "ymapsml": "http://api-fotki.yandex.ru/api/users/bella21abyss/album/521977/photos.ymapsml/"
+      },
+      "authors": [
+        {
+          "name": "bella21abyss",
+          "uid": "228271972"
+        }
+      ],
+      "id": "urn:yandex:fotki:bella21abyss:album:521977",
+      "imageCount": 27,
+      "img": {
+        "XXS": {
+          "width": 75,
+          "href": "http://img-fotki.yandex.ru/get/28292/228271972.0/0_1534d9_ed496374_XXS",
+          "height": 75
+        },
+        "S": {
+          "width": 150,
+          "href": "http://img-fotki.yandex.ru/get/28292/228271972.0/0_1534d9_ed496374_S",
+          "height": 113
+        }
+      },
+      "title": "Geek Picnic",
+      "author": "bella21abyss",
+      "summary": "Здесь фотографии с конференции новых технологий.",
+      "published": "2016-07-16T07:25:26Z"
+    },
+    {
+      "edited": "2016-08-03T20:04:29Z",
+      "updated": "2016-08-03T20:04:29Z",
+      "links": {
+        "edit": "http://api-fotki.yandex.ru/api/users/bella21abyss/album/524151/?format=json",
+        "self": "http://api-fotki.yandex.ru/api/users/bella21abyss/album/524151/?format=json",
+        "alternate": "http://fotki.yandex.ru/users/bella21abyss/album/524151/",
+        "cover": "http://api-fotki.yandex.ru/api/users/bella21abyss/photo/1399124/?format=json",
+        "photos": "http://api-fotki.yandex.ru/api/users/bella21abyss/album/524151/photos/?format=json",
+        "ymapsml": "http://api-fotki.yandex.ru/api/users/bella21abyss/album/524151/photos.ymapsml/"
+      },
+      "authors": [
+        {
+          "name": "bella21abyss",
+          "uid": "228271972"
+        }
+      ],
+      "id": "urn:yandex:fotki:bella21abyss:album:524151",
+      "imageCount": 5,
+      "img": {
+        "XXS": {
+          "width": 75,
+          "href": "http://img-fotki.yandex.ru/get/9509/228271972.1/0_155954_e5c7a571_XXS",
+          "height": 75
+        },
+        "S": {
+          "width": 150,
+          "href": "http://img-fotki.yandex.ru/get/9509/228271972.1/0_155954_e5c7a571_S",
+          "height": 94
+        }
+      },
+      "title": "Mexico",
+      "author": "bella21abyss",
+      "summary": "These photos are from beautiful Mexican trip. It was expensive for us, but we are glad to get such unforgettable moments!",
+      "published": "2016-08-03T20:03:20Z"
+    }
+  ],
+  "author": "bella21abyss",
+  "id": "urn:yandex:fotki:bella21abyss:albums"
+}

@@ -57,9 +57,14 @@ class Album
 	 */
 	private $linkYmapsml;
 	/**
+	 * Link for cover photo
 	 * @var string
 	 */
-	private $authorName;
+	private $imgHref;
+	/**
+	 * @var string
+	 */
+	private $author;
 	/**
 	 * @var integer
 	 */
@@ -236,17 +241,17 @@ class Album
 	/**
 	 * @return string
 	 */
-	public function getAuthorName()
+	public function getAuthor()
 	{
-		return $this->authorName;
+		return $this->author;
 	}
 	
 	/**
-	 * @param string $authorName
+	 * @param string $author
 	 */
-	public function setAuthorName($authorName)
+	public function setAuthor($author)
 	{
-		$this->authorName = $authorName;
+		$this->author = $author;
 	}
 	
 	/**
@@ -295,5 +300,21 @@ class Album
 	public function setSummary($summary)
 	{
 		$this->summary = $summary;
+	}
+	
+	/**
+	 * @return string
+	 */
+	public function getImgHref()
+	{
+		return $this->imgHref;
+	}
+	
+	/**
+	 * @param string $imgHref
+	 */
+	public function setImgHref($imgHref)
+	{
+		$this->imgHref = $imgHref;
 	}
 }
