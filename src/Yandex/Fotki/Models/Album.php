@@ -6,48 +6,75 @@
  * Time: 22:49
  */
 
-namespace Yandex\Fotki\Fotki\Models;
+namespace Yandex\Fotki\Models;
 
 /**
  * Класс, описывающий состав полей ресурса "Альбом", получаемого в сервисном документе.
  *
  * Class Album
- * @package Yandex\Fotki\Fotki\Models
+ * @package Yandex\Fotki\Models
  */
 class Album
 {
+	/**
+	 * @var integer
+	 */
 	private $id;
-	
+	/**
+	 * @var string
+	 */
 	private $dateEdited;
-	
+	/**
+	 * @var string
+	 */
 	private $dateUpdated;
-	
+	/**
+	 * @var string
+	 */
 	private $datePublished;
-	
+	/**
+	 * @var string
+	 */
 	private $linkEdit;
-	
+	/**
+	 * @var string
+	 */
 	private $linkSelf;
-	
+	/**
+	 * @var string
+	 */
 	private $linkAlternate;
-	
+	/**
+	 * @var string
+	 */
 	private $linkCover;
-	
+	/**
+	 * @var string
+	 */
 	private $linkPhotos;
-	
+	/**
+	 * @var string
+	 */
 	private $linkYmapsml;
-	
+	/**
+	 * @var string
+	 */
 	private $authorName;
-	
+	/**
+	 * @var integer
+	 */
 	private $imageCount;
-	
+	/**
+	 * @var string
+	 */
 	private $title;
-	
+	/**
+	 * @var string
+	 */
 	private $summary;
 	
-	private $covers = [];
-	
 	/**
-	 * @return mixed
+	 * @return int
 	 */
 	public function getId()
 	{
@@ -55,7 +82,7 @@ class Album
 	}
 	
 	/**
-	 * @param mixed $id
+	 * @param int $id
 	 */
 	public function setId($id)
 	{
@@ -63,7 +90,7 @@ class Album
 	}
 	
 	/**
-	 * @return mixed
+	 * @return string
 	 */
 	public function getDateEdited()
 	{
@@ -71,7 +98,7 @@ class Album
 	}
 	
 	/**
-	 * @param mixed $dateEdited
+	 * @param string $dateEdited
 	 */
 	public function setDateEdited($dateEdited)
 	{
@@ -79,7 +106,7 @@ class Album
 	}
 	
 	/**
-	 * @return mixed
+	 * @return string
 	 */
 	public function getDateUpdated()
 	{
@@ -87,7 +114,7 @@ class Album
 	}
 	
 	/**
-	 * @param mixed $dateUpdated
+	 * @param string $dateUpdated
 	 */
 	public function setDateUpdated($dateUpdated)
 	{
@@ -95,7 +122,7 @@ class Album
 	}
 	
 	/**
-	 * @return mixed
+	 * @return string
 	 */
 	public function getDatePublished()
 	{
@@ -103,7 +130,7 @@ class Album
 	}
 	
 	/**
-	 * @param mixed $datePublished
+	 * @param string $datePublished
 	 */
 	public function setDatePublished($datePublished)
 	{
@@ -111,7 +138,7 @@ class Album
 	}
 	
 	/**
-	 * @return mixed
+	 * @return string
 	 */
 	public function getLinkEdit()
 	{
@@ -119,7 +146,7 @@ class Album
 	}
 	
 	/**
-	 * @param mixed $linkEdit
+	 * @param string $linkEdit
 	 */
 	public function setLinkEdit($linkEdit)
 	{
@@ -127,7 +154,7 @@ class Album
 	}
 	
 	/**
-	 * @return mixed
+	 * @return string
 	 */
 	public function getLinkSelf()
 	{
@@ -135,7 +162,7 @@ class Album
 	}
 	
 	/**
-	 * @param mixed $linkSelf
+	 * @param string $linkSelf
 	 */
 	public function setLinkSelf($linkSelf)
 	{
@@ -143,7 +170,7 @@ class Album
 	}
 	
 	/**
-	 * @return mixed
+	 * @return string
 	 */
 	public function getLinkAlternate()
 	{
@@ -151,7 +178,7 @@ class Album
 	}
 	
 	/**
-	 * @param mixed $linkAlternate
+	 * @param string $linkAlternate
 	 */
 	public function setLinkAlternate($linkAlternate)
 	{
@@ -159,7 +186,7 @@ class Album
 	}
 	
 	/**
-	 * @return mixed
+	 * @return string
 	 */
 	public function getLinkCover()
 	{
@@ -167,7 +194,7 @@ class Album
 	}
 	
 	/**
-	 * @param mixed $linkCover
+	 * @param string $linkCover
 	 */
 	public function setLinkCover($linkCover)
 	{
@@ -175,7 +202,7 @@ class Album
 	}
 	
 	/**
-	 * @return mixed
+	 * @return string
 	 */
 	public function getLinkPhotos()
 	{
@@ -183,7 +210,7 @@ class Album
 	}
 	
 	/**
-	 * @param mixed $linkPhotos
+	 * @param string $linkPhotos
 	 */
 	public function setLinkPhotos($linkPhotos)
 	{
@@ -191,7 +218,7 @@ class Album
 	}
 	
 	/**
-	 * @return mixed
+	 * @return string
 	 */
 	public function getLinkYmapsml()
 	{
@@ -199,7 +226,7 @@ class Album
 	}
 	
 	/**
-	 * @param mixed $linkYmapsml
+	 * @param string $linkYmapsml
 	 */
 	public function setLinkYmapsml($linkYmapsml)
 	{
@@ -207,7 +234,7 @@ class Album
 	}
 	
 	/**
-	 * @return mixed
+	 * @return string
 	 */
 	public function getAuthorName()
 	{
@@ -215,7 +242,7 @@ class Album
 	}
 	
 	/**
-	 * @param mixed $authorName
+	 * @param string $authorName
 	 */
 	public function setAuthorName($authorName)
 	{
@@ -223,7 +250,7 @@ class Album
 	}
 	
 	/**
-	 * @return mixed
+	 * @return int
 	 */
 	public function getImageCount()
 	{
@@ -231,7 +258,7 @@ class Album
 	}
 	
 	/**
-	 * @param mixed $imageCount
+	 * @param int $imageCount
 	 */
 	public function setImageCount($imageCount)
 	{
@@ -239,7 +266,7 @@ class Album
 	}
 	
 	/**
-	 * @return mixed
+	 * @return string
 	 */
 	public function getTitle()
 	{
@@ -247,7 +274,7 @@ class Album
 	}
 	
 	/**
-	 * @param mixed $title
+	 * @param string $title
 	 */
 	public function setTitle($title)
 	{
@@ -255,7 +282,7 @@ class Album
 	}
 	
 	/**
-	 * @return mixed
+	 * @return string
 	 */
 	public function getSummary()
 	{
@@ -263,26 +290,10 @@ class Album
 	}
 	
 	/**
-	 * @param mixed $summary
+	 * @param string $summary
 	 */
 	public function setSummary($summary)
 	{
 		$this->summary = $summary;
-	}
-	
-	/**
-	 * @return array
-	 */
-	public function getCovers()
-	{
-		return $this->covers;
-	}
-	
-	/**
-	 * @param array $covers
-	 */
-	public function setCovers($covers)
-	{
-		$this->covers = $covers;
 	}
 }
