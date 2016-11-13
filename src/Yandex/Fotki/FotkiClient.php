@@ -37,7 +37,7 @@ class FotkiClient extends AbstractServiceClient
 	/**
 	 * @var string
 	 */
-	protected $userInfoLocation = '/api/users';
+	protected $userInfoLocation = 'api/users/';
 	/**
 	 * @var string
 	 */
@@ -78,7 +78,7 @@ class FotkiClient extends AbstractServiceClient
 	 */
 	public function getAlbums()
 	{
-		$url = $this->serviceDomain . $this->login . self::ALBUMS_PATH . '?' .
+		$url = $this->userInfoLocation . $this->login . self::ALBUMS_PATH . '?' .
 			\GuzzleHttp\Psr7\build_query(['format' => self::JSON_TYPE]);
 		
 		try
@@ -107,7 +107,7 @@ class FotkiClient extends AbstractServiceClient
 	 */
 	public function getAlbum($albumId)
 	{
-		$url = $this->serviceDomain . $this->login .
+		$url = $this->userInfoLocation . $this->login .
 			self::ALBUM_PATH . $albumId . '/?' .
 			\GuzzleHttp\Psr7\build_query(['format' => self::JSON_TYPE]);
 		
@@ -140,7 +140,7 @@ class FotkiClient extends AbstractServiceClient
 	 */
 	public function getAlbumPhotos($album, $fetchTagsInfo = false)
 	{
-		$url = $this->serviceDomain . $this->login . self::ALBUM_PATH .
+		$url = $this->userInfoLocation . $this->login . self::ALBUM_PATH .
 			$album . self::PHOTOS_PATH . '?' .
 			\GuzzleHttp\Psr7\build_query(['format' => self::JSON_TYPE]);
 		
@@ -173,7 +173,7 @@ class FotkiClient extends AbstractServiceClient
 	 */
 	public function getPhoto($photoId, $fetchTagsInfo = false)
 	{
-		$url = $this->serviceDomain . $this->login . self::PHOTO_PATH . $photoId . '?' .
+		$url = $this->userInfoLocation . $this->login . self::PHOTO_PATH . $photoId . '?' .
 			\GuzzleHttp\Psr7\build_query(['format' => self::JSON_TYPE]);
 		
 		try
