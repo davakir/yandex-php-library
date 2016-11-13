@@ -8,11 +8,13 @@
 
 namespace Yandex\Fotki\Models;
 
+use Yandex\Common\Model;
+
 /**
  * Class Photo
  * @package Yandex\Fotki\Models
  */
-class Photo
+class Photo extends Model
 {
 	/**
 	 * @var string

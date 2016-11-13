@@ -1,0 +1,36 @@
+{
+  "edited": "2016-09-14T19:33:28Z",
+  "updated": "2016-09-14T19:33:28Z",
+  "links": {
+    "edit": "http://api-fotki.yandex.ru/api/users/bella21abyss/album/521851/?format=json",
+    "self": "http://api-fotki.yandex.ru/api/users/bella21abyss/album/521851/?format=json",
+    "alternate": "http://fotki.yandex.ru/users/bella21abyss/album/521851/",
+    "cover": "http://api-fotki.yandex.ru/api/users/bella21abyss/photo/1389663/?format=json",
+    "photos": "http://api-fotki.yandex.ru/api/users/bella21abyss/album/521851/photos/?format=json",
+    "ymapsml": "http://api-fotki.yandex.ru/api/users/bella21abyss/album/521851/photos.ymapsml/"
+  },
+  "authors": [
+    {
+      "name": "bella21abyss",
+      "uid": "228271972"
+    }
+  ],
+  "id": "urn:yandex:fotki:bella21abyss:album:521851",
+  "imageCount": 27,
+  "img": {
+    "XXS": {
+      "width": 75,
+      "href": "http://img-fotki.yandex.ru/get/135076/228271972.0/0_15345f_27d90cab_XXS",
+      "height": 75
+    },
+    "S": {
+      "width": 117,
+      "href": "http://img-fotki.yandex.ru/get/135076/228271972.0/0_15345f_27d90cab_S",
+      "height": 150
+    }
+  },
+  "title": "Фотографии с Geek Picnic",
+  "author": "bella21abyss",
+  "summary": "Ходили слушать лекции о новых технологиях!",
+  "published": "2016-07-14T19:07:18Z"
+}

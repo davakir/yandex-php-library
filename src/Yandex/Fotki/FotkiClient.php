@@ -219,7 +219,6 @@ class FotkiClient extends AbstractServiceClient
 		$album->setAuthor($rawAlbum['author']);
 		$album->setTitle($rawAlbum['title']);
 		$album->setSummary($rawAlbum['summary']);
-		$album->setId($rawAlbum['id']);
 		$album->setImageCount($rawAlbum['imageCount']);
 		$album->setDateEdited($rawAlbum['edited']);
 		$album->setDateUpdated($rawAlbum['updated']);
@@ -230,6 +229,9 @@ class FotkiClient extends AbstractServiceClient
 		$album->setLinkPhotos($rawAlbum['links']['photos']);
 		$album->setLinkSelf($rawAlbum['links']['self']);
 		$album->setLinkYmapsml($rawAlbum['links']['ymapsml']);
+		
+		$id = explode(':', $rawAlbum['id']);
+		$album->setId(end($id));
 		
 		$imgHref = end($rawAlbum['img'])['href'];
 		$album->setImgHref(substr($imgHref, 0, strrpos($imgHref, '_') + 1));
@@ -270,13 +272,15 @@ class FotkiClient extends AbstractServiceClient
 		$photo->setAuthor($rawPhoto['author']);
 		$photo->setXxx($rawPhoto['xxx']);
 		$photo->setHideOriginal($rawPhoto['hideOriginal']);
-		$photo->setId($rawPhoto['id']);
 		$photo->setLinkAlbum($rawPhoto['links']['album']);
 		$photo->setLinkAlternate($rawPhoto['links']['alternate']);
 		$photo->setLinkEdit($rawPhoto['links']['edit']);
 		$photo->setLinkEditMedia($rawPhoto['links']['editMedia']);
 		$photo->setLinkSelf($rawPhoto['links']['self']);
-
+		
+		$id = explode(':', $rawPhoto['id']);
+		$photo->setId(end($id));
+		
 		if ($fetchTagsInfo)
 			$photo->setTags($this->processTags($rawPhoto['tags']));
 		else

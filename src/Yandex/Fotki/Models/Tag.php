@@ -8,11 +8,13 @@
 
 namespace Yandex\Fotki\Models;
 
+use Yandex\Common\Model;
+
 /**
  * Class Tag
  * @package Yandex\Fotki\Models
  */
-class Tag
+class Tag extends Model
 {
 	/**
 	 * @var

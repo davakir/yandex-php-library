@@ -55,6 +55,32 @@ class FotkiClientTest extends TestCase
 		);
 	}
 	
+	public function testGetAlbum()
+	{
+		$testData = file_get_contents(__DIR__ . '/' . $this->fixturesFolder . '/album.json');
+		
+		$response = new Response(200, [], \GuzzleHttp\Psr7\stream_for($testData));
+		
+		$guzzleHttpClientMock = $this->getMock('GuzzleHttp\Client', ['request']);
+		$guzzleHttpClientMock->expects($this->any())
+			->method('request')
+			->will($this->returnValue($response));
+		
+		/**
+		 * @var FotkiClient $fotkiClientMock
+		 */
+		$fotkiClientMock = $this->getMock('Yandex\Fotki\FotkiClient', ['getClient'], ['gornoaleksandr']);
+		$fotkiClientMock->expects($this->any())
+			->method('getClient')
+			->will($this->returnValue($guzzleHttpClientMock));
+		
+		$result = $fotkiClientMock->getAlbum(521851);
+		$this->assertEquals(
+			521851,
+			$result->getId()
+		);
+	}
+	
 	public function testGetPhoto()
 	{
 		$testData = file_get_contents(__DIR__ . '/' . $this->fixturesFolder . '/photo.json');

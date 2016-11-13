@@ -8,13 +8,15 @@
 
 namespace Yandex\Fotki\Models;
 
+use Yandex\Common\Model;
+
 /**
  * Класс, описывающий состав полей ресурса "Альбом", получаемого в сервисном документе.
  *
  * Class Album
  * @package Yandex\Fotki\Models
  */
-class Album
+class Album extends Model
 {
 	/**
 	 * @var integer
