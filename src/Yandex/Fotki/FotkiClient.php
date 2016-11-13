@@ -8,6 +8,7 @@
 
 namespace Yandex\Fotki;
 
+use GuzzleHttp\Client;
 use Yandex\Common\AbstractServiceClient;
 use Yandex\Common\HttpMethod;
 use Yandex\Fotki\Models\Album;
@@ -42,6 +43,10 @@ class FotkiClient extends AbstractServiceClient
 	 * @var string
 	 */
 	protected $serviceScheme = parent::HTTP_SCHEME;
+	/**
+	 * @var bool
+	 */
+	protected $needAuth;
 	
 	/**
 	 * @var string
@@ -63,9 +68,10 @@ class FotkiClient extends AbstractServiceClient
 	const PHOTO_PATH = '/photo/';
 	const PHOTOS_PATH = '/photos/';
 	
-	public function __construct($login)
+	public function __construct($login, $needAuth = false)
 	{
 		$this->login = $login;
+		$this->needAuth = $needAuth;
 	}
 	
 	/**
@@ -196,6 +202,36 @@ class FotkiClient extends AbstractServiceClient
 		return $result;
 	}
 	
+	protected function getClient()
+	{
+		if (is_null($this->client))
+		{
+			$defaultOptions = [
+				'base_uri' => $this->getServiceUrl(),
+				'headers' => [
+					'Host' => $this->getServiceDomain(),
+					'User-Agent' => $this->getUserAgent(),
+					'Accept' => '*/*'
+				]
+			];
+			if ($this->needAuth)
+			{
+				$defaultOptions['headers']['Authorization'] = 'OAuth ' . $this->getAccessToken();
+			}
+			if ($this->getProxy())
+			{
+				$defaultOptions['proxy'] = $this->getProxy();
+			}
+			if ($this->getDebug())
+			{
+				$defaultOptions['debug'] = $this->getDebug();
+			}
+			$this->client = new Client($defaultOptions);
+		}
+		
+		return $this->client;
+	}
+	
 	/**
 	 * @param array $data
 	 * @return array
@@ -218,7 +254,7 @@ class FotkiClient extends AbstractServiceClient
 		$album = new Album();
 		$album->setAuthor($rawAlbum['author']);
 		$album->setTitle($rawAlbum['title']);
-		$album->setSummary($rawAlbum['summary']);
+		$album->setSummary($rawAlbum['summary'] ? $rawAlbum['summary'] : '');
 		$album->setImageCount($rawAlbum['imageCount']);
 		$album->setDateEdited($rawAlbum['edited']);
 		$album->setDateUpdated($rawAlbum['updated']);
