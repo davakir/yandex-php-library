@@ -297,7 +297,7 @@ class FotkiClient extends AbstractServiceClient
 	private function processPhoto(array $rawPhoto, $fetchTagsInfo)
 	{
 		$photo = new Photo();
-		$photo->setDateCreated($rawPhoto['created']);
+		$photo->setDateCreated(isset($rawPhoto['created']) ? $rawPhoto['created'] : '');
 		$photo->setDateEdited(isset($rawPhoto['edited']) ? $rawPhoto['edited'] : '');
 		$photo->setDatePublished($rawPhoto['published']);
 		$photo->setDateUpdated($rawPhoto['updated']);
