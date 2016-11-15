@@ -254,7 +254,7 @@ class FotkiClient extends AbstractServiceClient
 		$album = new Album();
 		$album->setAuthor($rawAlbum['author']);
 		$album->setTitle($rawAlbum['title']);
-		$album->setSummary($rawAlbum['summary'] ? $rawAlbum['summary'] : '');
+		$album->setSummary(isset($rawAlbum['summary']) ? $rawAlbum['summary'] : '');
 		$album->setImageCount($rawAlbum['imageCount']);
 		$album->setDateEdited($rawAlbum['edited']);
 		$album->setDateUpdated($rawAlbum['updated']);
@@ -298,12 +298,12 @@ class FotkiClient extends AbstractServiceClient
 	{
 		$photo = new Photo();
 		$photo->setDateCreated($rawPhoto['created']);
-		$photo->setDateEdited($rawPhoto['edited']);
+		$photo->setDateEdited(isset($rawPhoto['edited']) ? $rawPhoto['edited'] : '');
 		$photo->setDatePublished($rawPhoto['published']);
 		$photo->setDateUpdated($rawPhoto['updated']);
 		$photo->setDisableComments($rawPhoto['disableComments']);
 		$photo->setTitle($rawPhoto['title']);
-		$photo->setSummary($rawPhoto['summary']);
+		$photo->setSummary(isset($rawPhoto['summary']) ? $rawPhoto['summary'] : '');
 		$photo->setAccess($rawPhoto['access']);
 		$photo->setAuthor($rawPhoto['author']);
 		$photo->setXxx($rawPhoto['xxx']);
